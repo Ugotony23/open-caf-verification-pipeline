@@ -17,7 +17,7 @@ An automated verification pipeline and review workbench designed to map organiza
 
 * **Frontend:** React 19, TypeScript, Tailwind CSS v4, Lucide React
 * **Backend:** Node.js, Express, Prisma (SQLite)
-* **AI Model:** Google Gemini API=AQ.Ab8RN6LpIcT3_RHrPadZ7ff8wE_RLBZyXCzyytMug-8rIG3EtA
+* **AI Model:** Google Gemini API=
 
 ---
 
