@@ -1,0 +1,6 @@
+{
+  "name": "Open CAF Verification Pipeline",
+  "description": "Production-grade backend verification pipeline and Human-in-the-Loop review platform for NCSC Cyber Assessment Framework mappings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
