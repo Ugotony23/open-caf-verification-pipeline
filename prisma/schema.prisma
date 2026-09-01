@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Objective {
+  id          String      @id
+  name        String
+  description String
+  principles  Principle[]
+}
+
+model Principle {
+  id          String    @id
+  objectiveId String
+  objective   Objective @relation(fields: [objectiveId], references: [id])
+  name        String
+  description String
+  outcomes    Outcome[]
+}
+
+model Outcome {
+  id          String    @id
+  principleId String
+  principle   Principle @relation(fields: [principleId], references: [id])
+  name        String
+  description String
+  igps        IGP[]
+}
+
+model IGP {
+  id        String    @id @default(cuid())
+  outcomeId String
+  outcome   Outcome   @relation(fields: [outcomeId], references: [id])
+  statement String
+  mappings  Mapping[]
+}
+
+model Evidence {
+  id         String    @id @default(cuid())
+  title      String
+  content    String
+  sourceType String    @default("text")
+  createdAt  DateTime  @default(now())
+  mappings   Mapping[]
+}
+
+model Mapping {
+  id            String     @id @default(cuid())
+  evidenceId    String
+  evidence      Evidence   @relation(fields: [evidenceId], references: [id])
+  igpId         String
+  igp           IGP        @relation(fields: [igpId], references: [id])
+  status        String
+  confidence    Float
+  aiReasoning   String
+  reviewStatus  String     @default("PENDING")
+  reviewerNotes String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  auditLogs     AuditLog[]
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  mappingId String
+  mapping   Mapping  @relation(fields: [mappingId], references: [id])
+  action    String
+  actor     String   @default("system")
+  details   String?
+  createdAt DateTime @default(now())
+}
