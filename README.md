@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Open CAF Verification Pipeline
 
-# Run and deploy your AI Studio app
+An automated verification pipeline and review workbench designed to map organizational compliance evidence against the **NCSC Cyber Assessment Framework (CAF)** using **Gemini API**.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/a10708d5-5e88-45a4-80ee-12fcac6ddb3a
+## Key Features
 
-## Run Locally
+* **Automated Evidence Mapping:** Evaluates policy and operational evidence against NCSC CAF Objectives (A, B, C, D), 14 Principles, and contributing outcomes.
+* **Indicator of Good Practice (IGP) Assessment:** Generates IGP compliance scores (*Achieved*, *Partially Achieved*, *Not Achieved*) with confidence metrics.
+* **Human-in-the-Loop Workbench:** Real-time review queue allowing security auditors to inspect side-by-side evidence, review AI logic, and approve or reject mappings.
+* **Auditability & Traceability:** Immutable transaction tracking for every verification decision to maintain compliance logs.
 
-**Prerequisites:**  Node.js
+---
 
+## Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+* **Frontend:** React 19, TypeScript, Tailwind CSS v4, Lucide React
+* **Backend:** Node.js, Express, Prisma (SQLite)
+* **AI Model:** Google Gemini API=AQ.Ab8RN6LpIcT3_RHrPadZ7ff8wE_RLBZyXCzyytMug-8rIG3EtA
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+* **Node.js** (v18 or higher)
+* **npm** or **bun**
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Ugotony23/open-caf-verification-pipeline.git](https://github.com/Ugotony23/open-caf-verification-pipeline.git)
+   cd open-caf-verification-pipeline
