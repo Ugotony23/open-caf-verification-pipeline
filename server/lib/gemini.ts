@@ -55,7 +55,7 @@ Return a status of ACHIEVED, PARTIALLY_ACHIEVED, or NOT_ACHIEVED, a confidence s
 between 0 and 1, and a short reasoning explaining the assessment.`;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.6-flash',
     contents: prompt,
     config: {
       responseMimeType: 'application/json',
