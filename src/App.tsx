@@ -31,7 +31,7 @@ export default function App() {
   }
 
   if (checkingSession) {
-    return <div className="min-h-screen bg-slate-950" />;
+    return <div className="min-h-screen bg-gradient-to-br from-red-950 via-red-900 to-amber-900" />;
   }
 
   if (!user) {
@@ -39,7 +39,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex bg-slate-950 text-slate-100">
+    <div className="min-h-screen flex bg-gradient-to-br from-red-950 via-red-900 to-amber-900 text-amber-50">
       <Sidebar view={view} onChange={setView} user={user} onLogout={handleLogout} />
       <main className="flex-1 p-8 max-w-5xl">
         {view === 'dashboard' && <Dashboard />}

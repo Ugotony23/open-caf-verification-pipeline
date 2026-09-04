@@ -21,17 +21,19 @@ export function Sidebar({
   onLogout: () => void;
 }) {
   return (
-    <aside className="w-64 shrink-0 border-r border-slate-800 bg-slate-950 p-4 flex flex-col gap-1">
+    <aside className="w-64 shrink-0 border-r border-amber-900/50 bg-red-950/70 backdrop-blur p-4 flex flex-col gap-1">
       <div className="px-2 py-3 mb-2">
-        <h1 className="text-sm font-semibold text-slate-100 leading-tight">Open CAF</h1>
-        <p className="text-xs text-slate-500">Verification Pipeline</p>
+        <h1 className="text-sm font-semibold text-amber-50 leading-tight">Open CAF</h1>
+        <p className="text-xs text-amber-200/60">Verification Pipeline</p>
       </div>
       {items.map(({ view: v, label, icon: Icon }) => (
         <button
           key={v}
           onClick={() => onChange(v)}
           className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm text-left transition-colors ${
-            view === v ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+            view === v
+              ? 'bg-amber-500 text-red-950 font-medium'
+              : 'text-amber-100/70 hover:bg-red-900/60 hover:text-amber-50'
           }`}
         >
           <Icon size={16} />
@@ -39,11 +41,11 @@ export function Sidebar({
         </button>
       ))}
 
-      <div className="mt-auto pt-3 border-t border-slate-800">
-        <p className="px-2 text-xs text-slate-500 truncate mb-1">{user.email}</p>
+      <div className="mt-auto pt-3 border-t border-amber-900/50">
+        <p className="px-2 text-xs text-amber-200/60 truncate mb-1">{user.email}</p>
         <button
           onClick={onLogout}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm text-left text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm text-left text-amber-100/70 hover:bg-red-900/60 hover:text-amber-50"
         >
           <LogOut size={16} />
           Sign out

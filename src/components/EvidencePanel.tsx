@@ -72,48 +72,48 @@ export function EvidencePanel() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-slate-100">Evidence</h2>
-        <p className="text-sm text-slate-500">Upload policy or operational evidence and run it against CAF outcomes.</p>
+        <h2 className="text-lg font-semibold text-amber-50">Evidence</h2>
+        <p className="text-sm text-amber-200/60">Upload policy or operational evidence and run it against CAF outcomes.</p>
       </div>
 
-      <form onSubmit={handleCreate} className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3">
+      <form onSubmit={handleCreate} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4 space-y-3">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Evidence title (e.g. Access Control Policy v2)"
-          className="w-full rounded-md bg-slate-950 border border-slate-800 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600"
+          className="w-full rounded-md bg-black/30 border border-amber-900/40 px-3 py-2 text-sm text-amber-50 placeholder:text-amber-200/30 focus:outline-none focus:border-amber-500"
         />
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Paste the evidence content..."
           rows={4}
-          className="w-full rounded-md bg-slate-950 border border-slate-800 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600"
+          className="w-full rounded-md bg-black/30 border border-amber-900/40 px-3 py-2 text-sm text-amber-50 placeholder:text-amber-200/30 focus:outline-none focus:border-amber-500"
         />
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2"
+          className="rounded-md bg-amber-500 hover:bg-amber-400 text-red-950 text-sm font-semibold px-4 py-2"
         >
           Add Evidence
         </button>
       </form>
 
-      {error && <p className="text-sm text-rose-400">{error}</p>}
+      {error && <p className="text-sm text-red-300">{error}</p>}
       {message && <p className="text-sm text-emerald-400">{message}</p>}
 
       <div className="space-y-3">
-        {evidence.length === 0 && <p className="text-sm text-slate-500">No evidence submitted yet.</p>}
+        {evidence.length === 0 && <p className="text-sm text-amber-200/60">No evidence submitted yet.</p>}
         {evidence.map((item) => (
-          <div key={item.id} className="rounded-lg border border-slate-800 bg-slate-900 p-4">
+          <div key={item.id} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="text-sm font-medium text-slate-100">{item.title}</h3>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2">{item.content}</p>
-                <p className="text-xs text-slate-600 mt-2">
+                <h3 className="text-sm font-medium text-amber-50">{item.title}</h3>
+                <p className="text-xs text-amber-200/60 mt-1 line-clamp-2">{item.content}</p>
+                <p className="text-xs text-amber-200/40 mt-2">
                   {item._count?.mappings ?? 0} mapping(s) · added {new Date(item.createdAt).toLocaleString()}
                 </p>
               </div>
-              <button onClick={() => handleDelete(item.id)} className="text-slate-600 hover:text-rose-400">
+              <button onClick={() => handleDelete(item.id)} className="text-amber-200/40 hover:text-red-400">
                 <Trash2 size={16} />
               </button>
             </div>
@@ -122,7 +122,7 @@ export function EvidencePanel() {
               <select
                 value={outcomeByEvidence[item.id] ?? ''}
                 onChange={(e) => setOutcomeByEvidence((s) => ({ ...s, [item.id]: e.target.value }))}
-                className="flex-1 rounded-md bg-slate-950 border border-slate-800 px-2 py-1.5 text-xs text-slate-200"
+                className="flex-1 rounded-md bg-black/30 border border-amber-900/40 px-2 py-1.5 text-xs text-amber-100"
               >
                 <option value="">Select contributing outcome...</option>
                 {outcomes.map((o) => (
@@ -134,7 +134,7 @@ export function EvidencePanel() {
               <button
                 onClick={() => handleAnalyze(item.id)}
                 disabled={analyzingId === item.id}
-                className="flex items-center gap-1.5 rounded-md bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-100 text-xs font-medium px-3 py-1.5"
+                className="flex items-center gap-1.5 rounded-md bg-red-800 hover:bg-red-700 disabled:opacity-50 text-amber-100 text-xs font-medium px-3 py-1.5"
               >
                 {analyzingId === item.id ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
                 Analyze
