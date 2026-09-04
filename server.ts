@@ -2,20 +2,40 @@ import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import session from 'express-session';
 import { createServer as createViteServer } from 'vite';
 import { apiRouter, errorHandler } from './server/routes/api.js';
+import { authRouter } from './server/routes/auth.js';
+import { requireAuth } from './server/lib/auth.js';
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  if (!process.env.SESSION_SECRET) {
+    throw new Error('SESSION_SECRET is not set. Add it to your .env file.');
+  }
+
   // Global Middlewares
-  app.use(cors());
+  app.use(cors({ origin: true, credentials: true }));
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true }));
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      },
+    }),
+  );
 
-  // Mount API Routes
-  app.use('/api', apiRouter);
+  // Mount API Routes — auth endpoints are open, everything else requires a session
+  app.use('/api/auth', authRouter);
+  app.use('/api', requireAuth, apiRouter);
 
   // API Error Handler
   app.use('/api', errorHandler);

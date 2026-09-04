@@ -20,9 +20,11 @@
     "@tailwindcss/vite": "^4.1.14",
     "@types/cors": "^2.8.19",
     "@vitejs/plugin-react": "^5.0.4",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
     "prisma": "^6.4.1",
@@ -32,7 +34,9 @@
     "zod": "^4.5.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.0",
     "@types/node": "^22.14.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

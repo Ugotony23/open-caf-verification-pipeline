@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { prisma } from './db.js';
+import { hashPassword } from './lib/auth.js';
 
 // Representative seed of the NCSC Cyber Assessment Framework (CAF) v3.2
 // structure: Objectives, Principles and Contributing Outcomes are the
@@ -224,6 +225,19 @@ async function main() {
   }
 
   console.log('CAF framework seed complete.');
+
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (adminEmail && adminPassword) {
+    await prisma.user.upsert({
+      where: { email: adminEmail },
+      update: { passwordHash: await hashPassword(adminPassword) },
+      create: { email: adminEmail, passwordHash: await hashPassword(adminPassword) },
+    });
+    console.log(`Login user ready: ${adminEmail}`);
+  } else {
+    console.log('Set ADMIN_EMAIL and ADMIN_PASSWORD in .env and re-run this seed to create a login user.');
+  }
 }
 
 main()

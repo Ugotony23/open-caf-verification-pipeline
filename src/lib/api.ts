@@ -20,6 +20,11 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  login: (email: string, password: string) =>
+    request<{ id: string; email: string }>('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
+  logout: () => request<void>('/auth/logout', { method: 'POST' }),
+  me: () => request<{ id: string; email: string }>('/auth/me'),
+
   getFramework: () => request<Objective[]>('/framework'),
 
   listEvidence: () => request<Evidence[]>('/evidence'),
