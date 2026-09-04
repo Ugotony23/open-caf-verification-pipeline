@@ -25,6 +25,11 @@ export default function App() {
     setUser(loggedInUser);
   }
 
+  async function handleRegister(email: string, password: string) {
+    const newUser = await api.register(email, password);
+    setUser(newUser);
+  }
+
   async function handleLogout() {
     await api.logout();
     setUser(null);
@@ -35,7 +40,7 @@ export default function App() {
   }
 
   if (!user) {
-    return <Login onLogin={handleLogin} />;
+    return <Login onLogin={handleLogin} onRegister={handleRegister} />;
   }
 
   return (

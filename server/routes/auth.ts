@@ -1,6 +1,6 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
 import { prisma } from '../db.js';
-import { hashPassword, verifyPassword, requireAuth } from '../lib/auth.js';
+import { hashPassword, verifyPassword } from '../lib/auth.js';
 
 export const authRouter = Router();
 
@@ -52,11 +52,10 @@ authRouter.get(
   }),
 );
 
-// Only an already-authenticated user can create additional accounts —
-// prevents open self-registration once the app is exposed publicly.
+// Open self-registration: anyone who can reach this server can create an
+// account. Deliberate — multiple people need to sign themselves up.
 authRouter.post(
   '/register',
-  requireAuth,
   asyncHandler(async (req, res) => {
     const { email, password } = req.body ?? {};
     if (!email || !password || password.length < 8) {
