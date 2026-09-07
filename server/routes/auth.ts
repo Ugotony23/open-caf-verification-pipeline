@@ -14,7 +14,8 @@ function asyncHandler(fn: (req: Request, res: Response) => Promise<void>) {
 authRouter.post(
   '/login',
   asyncHandler(async (req, res) => {
-    const { email, password } = req.body ?? {};
+    const email = String(req.body?.email ?? '').trim().toLowerCase();
+    const { password } = req.body ?? {};
     if (!email || !password) {
       res.status(400).json({ error: 'email and password are required.' });
       return;
@@ -65,7 +66,8 @@ authRouter.get(
 authRouter.post(
   '/register',
   asyncHandler(async (req, res) => {
-    const { email, password } = req.body ?? {};
+    const email = String(req.body?.email ?? '').trim().toLowerCase();
+    const { password } = req.body ?? {};
     if (!email || !password || password.length < 8) {
       res.status(400).json({ error: 'email and a password of at least 8 characters are required.' });
       return;

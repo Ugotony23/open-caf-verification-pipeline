@@ -226,7 +226,7 @@ async function main() {
 
   console.log('CAF framework seed complete.');
 
-  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const adminPassword = process.env.ADMIN_PASSWORD;
   if (adminEmail && adminPassword) {
     await prisma.user.upsert({
