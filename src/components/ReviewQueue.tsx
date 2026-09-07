@@ -38,7 +38,7 @@ export function ReviewQueue() {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value as typeof filter)}
-          className="rounded-md bg-black/30 border border-amber-900/40 px-2 py-1.5 text-xs text-amber-100"
+          className="rounded-md bg-black/30 border border-amber-500/30 px-2 py-1.5 text-xs text-amber-100"
         >
           <option value="PENDING">Pending</option>
           <option value="APPROVED">Approved</option>
@@ -52,7 +52,7 @@ export function ReviewQueue() {
       <div className="space-y-4">
         {mappings.length === 0 && <p className="text-sm text-amber-200/60">Nothing in this queue.</p>}
         {mappings.map((m) => (
-          <div key={m.id} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4 space-y-3">
+          <div key={m.id} className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4 space-y-3">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs text-amber-200/60">
@@ -68,11 +68,11 @@ export function ReviewQueue() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-md bg-black/30 border border-amber-900/40 p-3">
+              <div className="rounded-md bg-black/30 border border-amber-500/30 p-3">
                 <p className="text-xs font-medium text-amber-200/60 mb-1">Evidence: {m.evidence.title}</p>
                 <p className="text-xs text-amber-100/70 whitespace-pre-wrap line-clamp-4">{m.evidence.content}</p>
               </div>
-              <div className="rounded-md bg-black/30 border border-amber-900/40 p-3">
+              <div className="rounded-md bg-black/30 border border-amber-500/30 p-3">
                 <p className="text-xs font-medium text-amber-200/60 mb-1">
                   AI Reasoning · confidence {(m.confidence * 100).toFixed(0)}%
                 </p>
@@ -86,7 +86,7 @@ export function ReviewQueue() {
                   value={notes[m.id] ?? ''}
                   onChange={(e) => setNotes((s) => ({ ...s, [m.id]: e.target.value }))}
                   placeholder="Reviewer notes (optional)"
-                  className="flex-1 rounded-md bg-black/30 border border-amber-900/40 px-2 py-1.5 text-xs text-amber-100 placeholder:text-amber-200/30"
+                  className="flex-1 rounded-md bg-black/30 border border-amber-500/30 px-2 py-1.5 text-xs text-amber-100 placeholder:text-amber-200/30"
                 />
                 <button
                   onClick={() => decide(m.id, 'APPROVED')}

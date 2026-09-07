@@ -12,7 +12,7 @@ function PrincipleNode({ principle }: { principle: Objective['principles'][numbe
         <span className="font-medium">{principle.id}</span> {principle.name}
       </button>
       {open && (
-        <div className="ml-5 border-l border-amber-900/40 pl-3 space-y-1 py-1">
+        <div className="ml-5 border-l border-amber-500/30 pl-3 space-y-1 py-1">
           {principle.outcomes.map((o) => (
             <div key={o.id} className="text-xs text-amber-200/60">
               <span className="font-medium text-amber-100">{o.id}</span> {o.name}
@@ -49,7 +49,7 @@ export function FrameworkTree() {
       <div className="space-y-4">
         {framework.length === 0 && <p className="text-sm text-amber-200/60">No framework data seeded yet.</p>}
         {framework.map((o) => (
-          <div key={o.id} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4">
+          <div key={o.id} className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4">
             <h3 className="text-sm font-semibold text-amber-50">
               Objective {o.id}: {o.name}
             </h3>

@@ -1,6 +1,6 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
 import { prisma } from '../db.js';
-import { hashPassword, verifyPassword } from '../lib/auth.js';
+import { hashPassword, verifyPassword, isValidEmailFormat, domainAcceptsMail } from '../lib/auth.js';
 
 export const authRouter = Router();
 
@@ -60,6 +60,16 @@ authRouter.post(
     const { email, password } = req.body ?? {};
     if (!email || !password || password.length < 8) {
       res.status(400).json({ error: 'email and a password of at least 8 characters are required.' });
+      return;
+    }
+
+    if (!isValidEmailFormat(email)) {
+      res.status(400).json({ error: 'That doesn\'t look like a valid email address.' });
+      return;
+    }
+
+    if (!(await domainAcceptsMail(email))) {
+      res.status(400).json({ error: 'That email domain doesn\'t appear to be able to receive mail — check for a typo.' });
       return;
     }
 

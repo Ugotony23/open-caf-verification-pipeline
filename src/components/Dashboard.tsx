@@ -29,14 +29,14 @@ export function Dashboard() {
 
       <div className="grid grid-cols-3 gap-4">
         {cards.map((c) => (
-          <div key={c.label} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4">
+          <div key={c.label} className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4">
             <p className="text-2xl font-semibold text-amber-400">{c.value}</p>
             <p className="text-xs text-amber-200/60 mt-1">{c.label}</p>
           </div>
         ))}
       </div>
 
-      <div className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4">
+      <div className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4">
         <h3 className="text-sm font-medium text-amber-100 mb-3">IGP Status Breakdown</h3>
         {stats.byStatus.length === 0 ? (
           <p className="text-sm text-amber-200/60">No mappings yet. Upload evidence and run an analysis.</p>

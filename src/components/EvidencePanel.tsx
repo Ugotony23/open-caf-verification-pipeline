@@ -76,19 +76,19 @@ export function EvidencePanel() {
         <p className="text-sm text-amber-200/60">Upload policy or operational evidence and run it against CAF outcomes.</p>
       </div>
 
-      <form onSubmit={handleCreate} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4 space-y-3">
+      <form onSubmit={handleCreate} className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4 space-y-3">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Evidence title (e.g. Access Control Policy v2)"
-          className="w-full rounded-md bg-black/30 border border-amber-900/40 px-3 py-2 text-sm text-amber-50 placeholder:text-amber-200/30 focus:outline-none focus:border-amber-500"
+          className="w-full rounded-md bg-black/30 border border-amber-500/30 px-3 py-2 text-sm text-amber-50 placeholder:text-amber-200/30 focus:outline-none focus:border-amber-500"
         />
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Paste the evidence content..."
           rows={4}
-          className="w-full rounded-md bg-black/30 border border-amber-900/40 px-3 py-2 text-sm text-amber-50 placeholder:text-amber-200/30 focus:outline-none focus:border-amber-500"
+          className="w-full rounded-md bg-black/30 border border-amber-500/30 px-3 py-2 text-sm text-amber-50 placeholder:text-amber-200/30 focus:outline-none focus:border-amber-500"
         />
         <button
           type="submit"
@@ -104,7 +104,7 @@ export function EvidencePanel() {
       <div className="space-y-3">
         {evidence.length === 0 && <p className="text-sm text-amber-200/60">No evidence submitted yet.</p>}
         {evidence.map((item) => (
-          <div key={item.id} className="rounded-lg border border-amber-900/40 bg-zinc-900/80 p-4">
+          <div key={item.id} className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h3 className="text-sm font-medium text-amber-50">{item.title}</h3>
@@ -122,7 +122,7 @@ export function EvidencePanel() {
               <select
                 value={outcomeByEvidence[item.id] ?? ''}
                 onChange={(e) => setOutcomeByEvidence((s) => ({ ...s, [item.id]: e.target.value }))}
-                className="flex-1 rounded-md bg-black/30 border border-amber-900/40 px-2 py-1.5 text-xs text-amber-100"
+                className="flex-1 rounded-md bg-black/30 border border-amber-500/30 px-2 py-1.5 text-xs text-amber-100"
               >
                 <option value="">Select contributing outcome...</option>
                 {outcomes.map((o) => (
