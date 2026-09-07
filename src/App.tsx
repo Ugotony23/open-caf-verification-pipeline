@@ -26,8 +26,8 @@ export default function App() {
   }
 
   async function handleRegister(email: string, password: string) {
-    const newUser = await api.register(email, password);
-    setUser(newUser);
+    const result = await api.register(email, password);
+    return result.message;
   }
 
   async function handleLogout() {
@@ -36,7 +36,7 @@ export default function App() {
   }
 
   if (checkingSession) {
-    return <div className="min-h-screen bg-gradient-to-br from-red-600 via-red-500 to-amber-400" />;
+    return <div className="min-h-screen bg-[#F0F2F5]" />;
   }
 
   if (!user) {
@@ -44,7 +44,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-red-600 via-red-500 to-amber-400 text-amber-50">
+    <div className="min-h-screen flex bg-[#F0F2F5] text-[#050505]">
       <Sidebar view={view} onChange={setView} user={user} onLogout={handleLogout} />
       <main className="flex-1 p-8 max-w-5xl">
         {view === 'dashboard' && <Dashboard />}

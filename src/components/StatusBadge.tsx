@@ -1,9 +1,9 @@
 import type { ComplianceStatus, ReviewStatus } from '../types';
 
 const complianceStyles: Record<ComplianceStatus, string> = {
-  ACHIEVED: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-  PARTIALLY_ACHIEVED: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-  NOT_ACHIEVED: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
+  ACHIEVED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  PARTIALLY_ACHIEVED: 'bg-amber-50 text-amber-700 border-amber-200',
+  NOT_ACHIEVED: 'bg-rose-50 text-rose-700 border-rose-200',
 };
 
 const complianceLabels: Record<ComplianceStatus, string> = {
@@ -13,9 +13,9 @@ const complianceLabels: Record<ComplianceStatus, string> = {
 };
 
 const reviewStyles: Record<ReviewStatus, string> = {
-  PENDING: 'bg-slate-500/15 text-slate-300 border-slate-500/30',
-  APPROVED: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-  REJECTED: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
+  PENDING: 'bg-slate-100 text-slate-600 border-slate-300',
+  APPROVED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  REJECTED: 'bg-rose-50 text-rose-700 border-rose-200',
 };
 
 export function ComplianceBadge({ status }: { status: ComplianceStatus }) {

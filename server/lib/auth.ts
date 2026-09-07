@@ -1,6 +1,11 @@
 import bcrypt from 'bcryptjs';
 import dns from 'node:dns/promises';
+import crypto from 'node:crypto';
 import type { Request, Response, NextFunction } from 'express';
+
+export function generateVerificationToken(): string {
+  return crypto.randomBytes(32).toString('hex');
+}
 
 const EMAIL_FORMAT = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

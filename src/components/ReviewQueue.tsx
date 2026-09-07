@@ -32,13 +32,13 @@ export function ReviewQueue() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-amber-50">Review Queue</h2>
-          <p className="text-sm text-amber-200/60">Inspect AI evidence mappings and approve or reject them.</p>
+          <h2 className="text-lg font-semibold text-[#050505]">Review Queue</h2>
+          <p className="text-sm text-[#65676B]">Inspect AI evidence mappings and approve or reject them.</p>
         </div>
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value as typeof filter)}
-          className="rounded-md bg-black/30 border border-amber-500/30 px-2 py-1.5 text-xs text-amber-100"
+          className="rounded-md bg-white border border-[#CED0D4] px-2 py-1.5 text-xs text-[#050505]"
         >
           <option value="PENDING">Pending</option>
           <option value="APPROVED">Approved</option>
@@ -47,19 +47,19 @@ export function ReviewQueue() {
         </select>
       </div>
 
-      {error && <p className="text-sm text-red-300">{error}</p>}
+      {error && <p className="text-sm text-rose-600">{error}</p>}
 
       <div className="space-y-4">
-        {mappings.length === 0 && <p className="text-sm text-amber-200/60">Nothing in this queue.</p>}
+        {mappings.length === 0 && <p className="text-sm text-[#65676B]">Nothing in this queue.</p>}
         {mappings.map((m) => (
-          <div key={m.id} className="rounded-lg border border-amber-500/30 bg-zinc-900/80 p-4 space-y-3">
+          <div key={m.id} className="rounded-lg border border-[#DDDFE2] bg-white p-4 space-y-3 shadow-sm">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs text-amber-200/60">
+                <p className="text-xs text-[#65676B]">
                   {m.igp.outcome.principle.objective.id} &gt; {m.igp.outcome.principle.id} {m.igp.outcome.principle.name} &gt;{' '}
                   {m.igp.outcome.id} {m.igp.outcome.name}
                 </p>
-                <p className="text-sm text-amber-100 mt-1">{m.igp.statement}</p>
+                <p className="text-sm text-[#050505] mt-1">{m.igp.statement}</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <ComplianceBadge status={m.status} />
@@ -68,15 +68,15 @@ export function ReviewQueue() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-md bg-black/30 border border-amber-500/30 p-3">
-                <p className="text-xs font-medium text-amber-200/60 mb-1">Evidence: {m.evidence.title}</p>
-                <p className="text-xs text-amber-100/70 whitespace-pre-wrap line-clamp-4">{m.evidence.content}</p>
+              <div className="rounded-md bg-[#F7F8FA] border border-[#DDDFE2] p-3">
+                <p className="text-xs font-medium text-[#65676B] mb-1">Evidence: {m.evidence.title}</p>
+                <p className="text-xs text-[#050505] whitespace-pre-wrap line-clamp-4">{m.evidence.content}</p>
               </div>
-              <div className="rounded-md bg-black/30 border border-amber-500/30 p-3">
-                <p className="text-xs font-medium text-amber-200/60 mb-1">
+              <div className="rounded-md bg-[#F7F8FA] border border-[#DDDFE2] p-3">
+                <p className="text-xs font-medium text-[#65676B] mb-1">
                   AI Reasoning · confidence {(m.confidence * 100).toFixed(0)}%
                 </p>
-                <p className="text-xs text-amber-100/70 whitespace-pre-wrap">{m.aiReasoning}</p>
+                <p className="text-xs text-[#050505] whitespace-pre-wrap">{m.aiReasoning}</p>
               </div>
             </div>
 
@@ -86,23 +86,23 @@ export function ReviewQueue() {
                   value={notes[m.id] ?? ''}
                   onChange={(e) => setNotes((s) => ({ ...s, [m.id]: e.target.value }))}
                   placeholder="Reviewer notes (optional)"
-                  className="flex-1 rounded-md bg-black/30 border border-amber-500/30 px-2 py-1.5 text-xs text-amber-100 placeholder:text-amber-200/30"
+                  className="flex-1 rounded-md bg-white border border-[#CED0D4] px-2 py-1.5 text-xs text-[#050505] placeholder:text-[#8A8D91]"
                 />
                 <button
                   onClick={() => decide(m.id, 'APPROVED')}
-                  className="flex items-center gap-1 rounded-md bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 text-xs font-medium px-3 py-1.5"
+                  className="flex items-center gap-1 rounded-md bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-medium px-3 py-1.5"
                 >
                   <Check size={14} /> Approve
                 </button>
                 <button
                   onClick={() => decide(m.id, 'REJECTED')}
-                  className="flex items-center gap-1 rounded-md bg-red-600/20 hover:bg-red-600/30 text-red-400 text-xs font-medium px-3 py-1.5"
+                  className="flex items-center gap-1 rounded-md bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-medium px-3 py-1.5"
                 >
                   <X size={14} /> Reject
                 </button>
               </div>
             ) : m.reviewerNotes ? (
-              <p className="text-xs text-amber-200/60">Reviewer notes: {m.reviewerNotes}</p>
+              <p className="text-xs text-[#65676B]">Reviewer notes: {m.reviewerNotes}</p>
             ) : null}
           </div>
         ))}

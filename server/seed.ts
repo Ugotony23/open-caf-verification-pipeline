@@ -231,8 +231,8 @@ async function main() {
   if (adminEmail && adminPassword) {
     await prisma.user.upsert({
       where: { email: adminEmail },
-      update: { passwordHash: await hashPassword(adminPassword) },
-      create: { email: adminEmail, passwordHash: await hashPassword(adminPassword) },
+      update: { passwordHash: await hashPassword(adminPassword), emailVerified: true },
+      create: { email: adminEmail, passwordHash: await hashPassword(adminPassword), emailVerified: true },
     });
     console.log(`Login user ready: ${adminEmail}`);
   } else {
