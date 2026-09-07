@@ -32,6 +32,15 @@ const responseSchema = {
   required: ['status', 'confidence', 'reasoning'],
 };
 
+function isTransientError(err: unknown): boolean {
+  const message = err instanceof Error ? err.message : String(err);
+  return /"code":\s*503|"status":\s*"UNAVAILABLE"|"code":\s*429|"status":\s*"RESOURCE_EXHAUSTED"/.test(message);
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function assessEvidenceAgainstIgp(
   evidenceContent: string,
   igpStatement: string,
@@ -54,24 +63,40 @@ Assess whether the evidence demonstrates that the Indicator of Good Practice is 
 Return a status of ACHIEVED, PARTIALLY_ACHIEVED, or NOT_ACHIEVED, a confidence score
 between 0 and 1, and a short reasoning explaining the assessment.`;
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-3.6-flash',
-    contents: prompt,
-    config: {
-      responseMimeType: 'application/json',
-      responseSchema,
-    },
-  });
+  const maxAttempts = 3;
+  let lastError: unknown;
 
-  const text = response.text;
-  if (!text) {
-    throw new Error('Gemini API returned an empty response.');
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.6-flash',
+        contents: prompt,
+        config: {
+          responseMimeType: 'application/json',
+          responseSchema,
+        },
+      });
+
+      const text = response.text;
+      if (!text) {
+        throw new Error('Gemini API returned an empty response.');
+      }
+
+      const parsed = JSON.parse(text);
+      return {
+        status: parsed.status,
+        confidence: Math.max(0, Math.min(1, Number(parsed.confidence))),
+        reasoning: parsed.reasoning,
+      };
+    } catch (err) {
+      lastError = err;
+      if (attempt < maxAttempts && isTransientError(err)) {
+        await sleep(attempt * 1500); // 1.5s, then 3s
+        continue;
+      }
+      throw err;
+    }
   }
 
-  const parsed = JSON.parse(text);
-  return {
-    status: parsed.status,
-    confidence: Math.max(0, Math.min(1, Number(parsed.confidence))),
-    reasoning: parsed.reasoning,
-  };
+  throw lastError;
 }
